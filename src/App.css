@@ -2,6 +2,56 @@
   text-align: center;
 }
 
+.container{
+  max-width: 960px;
+  height: 500px;
+  margin-top:  10%;
+  text-align: center;
+  padding: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.child{
+  border: 1px solid black;
+  text-align: center;
+  margin: 5%;
+  
+}
+
+.login-form {
+  max-width: 300px;
+}
+.login-form-forgot {
+  float: right;
+}
+.login-form-button {
+  width: 100%;
+}
+
+.container2 {
+  max-width: 960px;
+  margin: 0 auto;
+  text-align: center;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.textdoby{
+  align-items: center;
+  justify-content: center;
+}
+
+.Navbar{
+  background-color: #000;
+  display: block;
+  color: #fff;
+  padding-left: 16px;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
