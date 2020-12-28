@@ -47,7 +47,7 @@ const Regis = () => {
       birthday: state.birthday,
     })
       .then((res) => {
-        console.log(res);
+        console.log('job', res);
         var user = jwt_decode(res.data.access_token);
         console.log(user)
         user.token = res.data.access_token;

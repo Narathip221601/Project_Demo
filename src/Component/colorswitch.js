@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { Quicktest } from "../"
+import { GetQuizs } from "../Component/color";
+import { showLoadingCallBack,  errorCallBack } from "../Component/color";
 // import {} from 
 
 function Colorswitch() {
