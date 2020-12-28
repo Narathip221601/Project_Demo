@@ -22,6 +22,19 @@ body {
   
 }
 
+.Navbars {
+
+  width: 80%;
+  height: 50%;
+  margin: 1%;
+  text-align: center;
+  font-size: 16px;
+  color: #ffffff;
+  padding: 20px;
+  width: auto;
+  background: #141516;
+  border-radius: 20px;
+}
 
 .Navbar {
 
@@ -151,6 +164,17 @@ body {
   border-radius: 20px;
   margin: 5%;
   background-color: #ffffff;
+
+}
+
+.bout2 {
+
+  color: #000000;
+  border: 3px solid rgb(0, 0, 0);
+  padding: 5px;
+  border-radius: 20px;
+  margin: 5%;
+  background-color: rgb(207, 207, 207);
 
 }
 

@@ -1,11 +1,21 @@
 import React, { useState } from "react";
 import "./App.css";
 import Eve from "./Assets/eye.png";
-import { Row, Col, Button, Form, Input, Radio, DatePicker } from "antd";
-import Butre from "./Component/butre";
-import Date from "./Component/date";
-import Dare2 from "./Component/dare2";
+import {
+  Row, Col, Button, Form, Input, Radio, DatePicker,
+  // AutoComplete,
+  // Checkbox,
+  // Tooltip,
+  // Cascader,
+  // Select,
+} from "antd";
+// import Butre from "./Component/butre";
+// import Date from "./Component/date";
+// import Dare2 from "./Component/dare2";
 import Axios from "axios";
+import jwt_decode from "jwt-decode";
+// import { QuestionCircleOutlined } from '@ant-design/icons';
+
 
 const Regis = () => {
   const [componentSize, setComponentSize] = useState("default");
@@ -18,9 +28,9 @@ const Regis = () => {
     birthday: "",
   });
 
-  const [data, setData] = useState("");
-  const [genders, setgenders] = useState("");
-  const [birthday, setbirthdays] = useState("");
+  // const [data, setData] = useState("");
+  // const [genders, setgenders] = useState("");
+  // const [birthday, setbirthdays] = useState("");
   const onFormLayoutChange = ({ size }) => {
     setComponentSize(size);
   };
@@ -28,7 +38,7 @@ const Regis = () => {
   const register = () => {
     console.log("state", state);
 
-     Axios.post("http://139.59.232.220:9000/users/register", {
+    Axios.post("http://139.59.232.220:9000/users/register", {
       username: state.username,
       password: state.password,
       first_name: state.first_name,
@@ -36,18 +46,28 @@ const Regis = () => {
       gender: state.gender,
       birthday: state.birthday,
     })
-      .then(({ data }) => {
-        console.log(data);
-        window.location.href = "/home";
+      .then((res) => {
+        console.log(res);
+        var user = jwt_decode(res.data.access_token);
+        console.log(user)
+        user.token = res.data.access_token;
+        window.sessionStorage.setItem("token", JSON.stringify(res.data));
+        window.sessionStorage.setItem("isLogin", 1);
+        // window.location.href = "/butto";
+        window.location.assign("/home")
+        localStorage.setItem('token', res.data.token);
       })
       .catch((error) => {
         console.log(error);
-      }); 
+      });
   };
 
-  const demo = () => {
-    console.log("asdsd");
-  };
+  // const demo = () => {
+  //   console.log("asdsd");
+  // };
+
+
+
 
   return (
     <>
@@ -161,17 +181,85 @@ const Regis = () => {
                 <Col className="gutter-row" flex="auto">
                   <Form.Item
                     name="password"
+                    hasFeedback
                     rules={[{ required: true, message: "กรุณาใส่ Password" }]}
                   >
-                    <Input
+                    <Input.Password
                       placeholder="password*"
                       onChange={(e) =>
                         setState({ ...state, password: e.target.value })
                       }
                     />
                   </Form.Item>
+                  <Form.Item
+                    name="confirm"
+                    dependencies={['password']}
+                    hasFeedback
+                    rules={[
+                      {
+                        required: true,
+                        message: 'Please confirm your password!',
+                      },
+                      ({ getFieldValue }) => ({
+                        validator(rule, value) {
+                          if (!value || getFieldValue('password') === value) {
+                            return Promise.resolve();
+                          }
+
+                          return Promise.reject('The two passwords that you entered do not match!');
+                        },
+                      }),
+                    ]}
+                  >
+                    <Input.Password 
+                      placeholder="confirm password*"
+                      />
+                  </Form.Item>
+
+
+
+
+
+
                 </Col>
               </Row>
+              {/* <Form.Item
+        name="password"
+        label="Password"
+        rules={[
+          {
+            required: true,
+            message: 'Please input your password!',
+          },
+        ]}
+        hasFeedback
+      >
+        <Input.Password />
+      </Form.Item>
+
+      <Form.Item
+        name="confirm"
+        label="Confirm Password"
+        dependencies={['password']}
+        hasFeedback
+        rules={[
+          {
+            required: true,
+            message: 'Please confirm your password!',
+          },
+          ({ getFieldValue }) => ({
+            validator(rule, value) {
+              if (!value || getFieldValue('password') === value) {
+                return Promise.resolve();
+              }
+
+              return Promise.reject('The two passwords that you entered do not match!');
+            },
+          }),
+        ]}
+      >
+        <Input.Password />
+      </Form.Item> */}
               {/* end */}
               <Button className="but4" type="Submit" onClick={() => register()}>
                 สร้าง

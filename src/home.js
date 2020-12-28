@@ -17,7 +17,7 @@ class Home extends Component {
     return (
       <>
         <Col span={24}>
-          <Link to="/quicktest2">
+          <Link to="/red1">
             <Button className="newbut1" type="button">
               เริ่มทำแบบทดสอบ
             </Button>
